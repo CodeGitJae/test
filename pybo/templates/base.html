@@ -12,18 +12,24 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="{{url_for('board.list')}}">다모여게시판</a>
+          <a class="navbar-brand" href="{{url_for('main.index')}}">다모여게시판</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% if g.user %}
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">회원가입</a>
+                <a class="nav-link" href="{{url_for('auth.logout')}}">로그아웃</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{url_for('auth.signup')}}">회원가입</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{url_for('auth.login')}}">로그인</a>
               </li>
+            {% endif %}
               <li class="nav-item">
                 <a class="nav-link" href="{{url_for('map.map_search')}}">플레이스 검색 (Map information)</a>
               </li>
