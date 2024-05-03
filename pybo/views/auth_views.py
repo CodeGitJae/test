@@ -102,10 +102,11 @@ def signup():
 
         if not user:
             username = form.username.data
+            nickname = form.nickname.data
             password = generate_password_hash(form.password1.data)
             email = form.email.data
 
-            user = User(username=username, password=password, email=email)
+            user = User(username=username, nickname=nickname, password=password, email=email)
 
             db.session.add(user)
             db.session.commit()

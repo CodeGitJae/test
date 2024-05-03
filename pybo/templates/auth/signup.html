@@ -70,11 +70,15 @@
                 }
             })
 
+        })
+
         $("#checknickname").click(function(){
             let nickname = $("#nickname").val()
 
             if(nickname == ""){
+                $("#checknicknameresult").text("닉네임을 입력하세요")
                 $("#nickname").focus()
+                return;
             }
 
             $.ajax({
@@ -89,12 +93,11 @@
                         $("#nickname").focus()
                     }
                 }
-            });
-        });
+            })
+        })
 
-    });
+    })
 
-});
 
 </script>
 
