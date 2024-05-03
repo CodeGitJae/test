@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Covid19 stats for {{sheet_name}}</h1>
+    <img src="{{url_for('static', filename=img_path)}}" alt="코로나 누적데이터 사진" style="width: 100%; height: auto;">
+
+</div>
+
+{% endblock %}

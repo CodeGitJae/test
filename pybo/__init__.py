@@ -27,11 +27,12 @@ def create_app():
 
     from . import models 
 
-    from .views import main_views, board_views, auth_views,map_search_views
+    from .views import main_views, board_views, auth_views,map_search_views, covid19_views
 
     app.register_blueprint(main_views.bp)
     app.register_blueprint(board_views.bp)
     app.register_blueprint(auth_views.bp)
     app.register_blueprint(map_search_views.bp)
+    app.register_blueprint(covid19_views.bp)
 
     return app
