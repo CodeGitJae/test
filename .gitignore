@@ -213,11 +213,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 *.db
-<<<<<<< HEAD
 
 
 # End of https://www.toptal.com/developers/gitignore/api/flask,visualstudiocode,windows
 
-=======
 # End of https://www.toptal.com/developers/gitignore/api/flask,visualstudiocode,windows
->>>>>>> cd8931e (코로나 전수 감시통계표 시작)
