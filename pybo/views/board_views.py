@@ -1,11 +1,21 @@
-from flask import Flask, Blueprint, render_template
-from pybo.models import Question
+from flask import Flask, Blueprint, render_template,session
+from pybo.models import Question, User
 
 bp = Blueprint("board", __name__, url_prefix="/board")
 
 
+@bp.route("/nickname")
+def nickname():
+
+    users = User.query.all()
+    nicknames = [user.nickname for user in users]
+    
+    return render_template("board/user_nickname.html", nicknames=nicknames)
+    
+
 @bp.route("/list")
 def list():
-    question_list= Question.query.order_by(Question.create_date.desc())
-    return render_template("board/board_list.html", question_list=question_list)
+
+    return render_template('board/board_list.html')
+
 
