@@ -7,3 +7,5 @@ SQLALCHEMY_DATABASE_URI= "sqlite:///{}".format(
 )
 
 SQLALCHEMY_TRACK_MIDIFICATIONS = False
+
+SECRET_KEY="학원"
