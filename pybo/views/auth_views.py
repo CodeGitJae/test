@@ -10,6 +10,19 @@ import functools
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
+@bp.route("/checknickname/<nickname>")
+def check_nick_name(nickname):
+
+    user = User.query.filter_by(nickname=nickname).first()
+
+    if not user:
+        return str(1)
+    else:
+        return str(-1)
+    
+
+
+
 @bp.route("/checkusername/<username>")
 def check_user_name(username):
     user = User.query.filter_by(username=username).first()
@@ -58,7 +71,6 @@ def login():
             error = "비밀번호가 틀렸습니다"
 
         if error is None:
-            print("bbbbbbbbbbbbbbbbbbbb")
             session.clear()
             session['user_id'] = user.id
             return redirect(url_for("main.index"))
@@ -75,6 +87,14 @@ def signup():
     if request.method == 'POST' and form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         user2 = User.query.filter_by(email=form.email.data).first()
+        user3 = User.query.filter_by(nickname=form.nickname.data).first()
+
+
+
+        if user3:
+            flash("중복된 닉네임입니다")
+            return render_template("auth/signup.html", form=form)
+        
 
         if user2:
             flash("중복된 이메일입니다")

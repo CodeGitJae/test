@@ -14,6 +14,14 @@
         <p id="checkusernameresult"></p>
     </div>
 
+    <div class="mb-3">
+        <label for="nickname" class=""form-label>닉네임</label>
+        <input class="form-control" id="nickname" name="nickname" value="{{form.nickname.data or''}}">        
+        <button id="checknickname" type="button">중복확인</button>
+        <p id="checknicknameresult"></p>
+    </div>
+
+
     <div>
         <label for="password1" class="form-label">비밀번호</label>
         <input type="password" class="form-control" id="password1" name="password1">
@@ -54,15 +62,41 @@
                 dataType:"text",
                 success: function(result){
                     if(result == "1"){
-                        $("#checkusernameresult").text("사용가능")
+                        $("#checkusernameresult").text("사용가능한 아이디입니다")
                     }else if(result =="-1"){
-                        $("#checkusernameresult").text("사용불가")
+                        $("#checkusernameresult").text("중복된 아이디입니다")
                         $("#username").focus()
                     }
                 }
             })
-        })
-    })
+
+        $("#checknickname").click(function(){
+            let nickname = $("#nickname").val()
+
+            if(nickname == ""){
+                $("#nickname").focus()
+            }
+
+            $.ajax({
+                url:"/auth/checknickname/"+nickname,
+                type:"GET",
+                dataType:"text",
+                success: function(result){
+                    if(result == "1"){
+                        $("#checknicknameresult").text("사용가능한 닉네임입니다")
+                    }else if(result =="-1"){
+                        $("#checknicknameresult").text("중복된 닉네임입니다")
+                        $("#nickname").focus()
+                    }
+                }
+            });
+        });
+
+    });
+
+});
+
 </script>
+
 
 {% endblock %}

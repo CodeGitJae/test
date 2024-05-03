@@ -16,4 +16,6 @@ def play_g():
 @bp.route("/")
 def index():
 
-    return render_template("board/board_list.html")
+    question_list= Question.query.order_by(Question.create_date.desc())
+
+    return render_template("board/board_list.html",question_list=question_list)
