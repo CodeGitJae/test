@@ -1,12 +1,34 @@
-from flask import Flask, Blueprint, render_template,session, request, url_for
+from flask import Flask, Blueprint, render_template,session, request, url_for, g, flash
 from pybo.models import Question, User
 from pybo.forms import QuestionForm, AnswerForm
 from datetime import datetime
 from pybo import db
 from werkzeug.utils import redirect
 
-
 bp = Blueprint("board", __name__, url_prefix="/board")
+
+
+@bp.route("/update/<int:question_id>", methods=("GET","POST"))
+def update(question_id):
+    question = Question.query.get_or_404((question_id))
+    
+    if g.user != question.user:
+        flash("수정 권한이 없습니다.")
+        return redirect(url_for('board.board_detail', question_id=question_id))
+    
+    if request.method == 'POST':
+        form = QuestionForm()
+
+        if form.validate_on_submit():
+            form.populate_obj(question)
+            question.update_date = datetime.now()
+            db.session.commit()
+
+            return redirect(url_for('board.board_detail', question_id=question_id))
+    else:
+        form = QuestionForm(obj=question)
+
+    return render_template("board/create_form.html", form=form) 
 
 @bp.route("/detail/<int:question_id>", methods=("GET","POST"))
 def board_detail(question_id):
