@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<hr>
+<h2>게시글 자세히 보기</h2>
+
+<div class="container">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">{{question.subject}}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{question.content}}</h6>
+        <p class="card-text">{{question.create_date}}</p>
+        <a href="{{url_for('board.list')}}" class="card-link">목록</a>
+        <a href="#" class="card-link">수정</a>
+        <a href="#" class="card-link">삭제</a>
+        </div>
+    </div>
+
+    <h4 class="border-bottom py-2 my-3">{{question.answer_set | length }}개의 덧글이 있습니다.</h4>
+    <hr>
+
+    {% for answer in question.answer_set%}
+    <div class="card my-3" style="max-width: 23%; height: auto;">
+        <div class="card-body">
+        <h5 class="card-title">{{answer.content}}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{answer.create_date}}</h6>
+        <a href="{{url_for('board.list')}}" class="card-link">목록</a>
+        <a href="#" class="card-link">수정</a>
+        <a href="#" class="card-link">삭제</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    <form method="post" action="{{url_for('answer.create_answer', question_id=question.id)}}">
+        {{form.csrf_token}}
+        {% include "form_errors.html" %}
+        
+        <input type="hidden" name="user_id" value="{{g.user.id}}">
+
+        <textarea name="content" rows="10" style="max-width: 45%; height: auto;"></textarea>
+        <button>답글 등록</button>
+    </form>
+</div>
+
+{% endblock%}

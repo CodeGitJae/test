@@ -6,8 +6,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
 import functools
 
-
-
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 @bp.route("/checknickname/<nickname>")

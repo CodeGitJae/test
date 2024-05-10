@@ -15,7 +15,11 @@ def play_g():
 
 @bp.route("/")
 def index():
-
     question_list= Question.query.order_by(Question.create_date.desc())
+    funimg =[
+        "/others/fun1.jpg",
+        "/others/fun2.png",
+        "/others/fun3.jpg"
+    ]
 
-    return render_template("board/board_list.html",question_list=question_list)
+    return render_template("board/board_list.html",question_list=question_list, funimg=funimg)
