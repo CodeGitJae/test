@@ -10,6 +10,7 @@
     <div class="mb-3">
         <label for="username" class=""form-label>아이디</label>
         <input class="form-control" id="username" name="username" value="{{form.username.data or''}}">        
+        <p style="color: rgb(165, 165, 165);">아이디는 최소 5자이상 입력 하셔야 합니다.</p>
         <button id="checkusername" type="button">중복확인</button>
         <p id="checkusernameresult"></p>
     </div>

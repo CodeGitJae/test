@@ -17,7 +17,6 @@ class QuestionForm(FlaskForm):
     subject = StringField('제목', validators=[DataRequired("제목은 필수 입력 사항 입니다.")])
     content = TextAreaField('내용',  validators=[DataRequired('내용은 필수 입력 사항 입니다.')])
     user_id = StringField('작성자', validators=[DataRequired("로그인 후 사용하세요.")])
-    nickname = StringField('닉네임', validators=[DataRequired("")])
 
 class AnswerForm(FlaskForm):
     content = TextAreaField('내용', validators=[DataRequired("덧글 입력은 필수 항목 입니다.")])
