@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% include "carousel.html" %}
+
 <table class="table">
     <thead>
       <tr>
@@ -16,7 +18,7 @@
       {% for question in question_list %}
       <tr>
         <th scope="row">{{question.id}}</th>
-        <th scope="row">{{question.subject}}</th>
+        <th scope="row"><a href="{{url_for('board.board_detail', question_id=question.id)}}">{{question.subject}}</a></th>
         <th scope="row">{{question.content}}</th>
         <th scope="row">{{question.nickname}}</th>
         <th scope="row">{{question.create_date}}</th>
@@ -24,4 +26,6 @@
       {% endfor %}
     </tbody>
   </table>
+  
+  <a href="{{url_for('board.create')}}">질문등록</a>
 {% endblock %}
